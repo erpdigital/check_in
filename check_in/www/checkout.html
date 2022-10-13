@@ -83,7 +83,7 @@
             }
               function check_out(attendance_id) {
                 frappe.call({
-                  method: "erpnext.hr.api.check_out",
+                  method: "check_in.api.check_out",
                   args: {
                     attendance_id: attendance_id
                 },
