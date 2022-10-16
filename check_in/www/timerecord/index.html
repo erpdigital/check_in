@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="assets/js/scanner.js"></script>
+  </head>
+<body>
+  <div class="current_time">
+    <p> Welcome </p>
+    <p id="company"> </p>
+    <p> Good morning </p>
+    <p id="now"></p>
+  </div>
+  <div id="employee" class="card-container" style="display:block">
+    <div class="employee_card">
+      <img id="image" class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
+      <p id="name"></p>
+      <p id="occupation"></p>
+    </div>
+    <div id="timerecord">
+      <p id="status"></p>
+      <p id="check_time"></p>
+    </div>
+  </div>
+  <script>
+    document.getElementsByClassName('card-container').className+="s";
+    </script>
+
+  <div id="check_in">
+    <p id="check">Please use RFID tag to Check-in/Check-out</p>
+  </div>
+</body>
+
+
+</html>
