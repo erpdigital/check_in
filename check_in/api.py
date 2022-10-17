@@ -2,7 +2,6 @@ from ast import Eq, Str
 from datetime import timedelta
 import imp
 from typing import List
-
 from check_in.employee_timerecord import *
 import frappe
 from frappe import _
@@ -12,7 +11,7 @@ from frappe.utils.data import nowdate
 
 from check_in.constants import *
 
-
+#attendance_id for testing assigned, will remove
 @frappe.whitelist()
 def check_in(attendance_id="0493543216"):
     employee_timerecord = EmployeeTimeRecord( attendance_id=attendance_id, type=EMPLOYEE_LOG_TYPE_IN)
