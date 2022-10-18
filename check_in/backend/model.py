@@ -1,5 +1,6 @@
 from typing import NamedTuple
 
+
 class ModelEmployee(NamedTuple):
      name: str
      employee_name : str

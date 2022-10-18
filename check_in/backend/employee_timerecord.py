@@ -3,8 +3,8 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import get_link_to_form, now_datetime, nowdate
 from frappe.utils.data import nowdate
-from .constants import *
-from .model import *
+from check_in.constants import *
+from check_in.model import *
 
     
 class EmployeeTimeRecord:
