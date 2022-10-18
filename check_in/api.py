@@ -12,7 +12,7 @@ from frappe.utils.data import nowdate
 
 from check_in.backend.constants import *
 
-
+#attendance_id for testing assigned, will remove
 @frappe.whitelist()
 def check_in(attendance_id="0493543216"):
     employee_timerecord = EmployeeTimeRecord(attendance_id=attendance_id, type=EMPLOYEE_LOG_TYPE_IN)
