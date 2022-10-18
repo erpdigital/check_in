@@ -25,7 +25,7 @@ class EmployeeTimeRecord:
         self.set_check_in()
         self.get_working_hours()
         self.set_attendance()
-        return [ self.employee.employee_name, self.employee.image, self.employee.designation ]
+        return self.employee  # [ self.employee.employee_name, self.employee.image, self.employee.designation ]
 
 
     def make_checkout(self):
