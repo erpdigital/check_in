@@ -1,4 +1,3 @@
-
 import frappe
 from frappe import _
 from frappe.model.document import Document
@@ -6,10 +5,8 @@ from frappe.utils import get_link_to_form, now_datetime, nowdate
 from frappe.utils.data import nowdate
 from check_in.constants import *
 from check_in.model import *
-from datetime import timedelta
-    
-#TODO Get last checkin time during checkout
 
+    
 class EmployeeTimeRecord:
     def __init__(self, attendance_id, type) -> None:
         self.attendance_id = attendance_id
@@ -19,7 +16,7 @@ class EmployeeTimeRecord:
     def make(self):        
         return self.make_checkin() if(self.type == EMPLOYEE_LOG_TYPE_IN) else self.make_checkout()   
           
-    
+
     def make_checkin(self):
         self.get_employee()
         self.set_check_in()
@@ -33,10 +30,9 @@ class EmployeeTimeRecord:
         self.set_check_out()
         self.get_working_hours()
         self.set_attendance()
-        return [ self.employee.employee_name, self.employee.image,self.working_hours, self.employee.designation ]
+        return [ self.employee.employee_name, self.employee.image, self.employee.company, self.employee.designation ]
 
     
-
     def check_status(self):
         self.get_employee()
         return self.get_status()
@@ -54,18 +50,18 @@ class EmployeeTimeRecord:
 
 
     def get_employee(self):
-        employee1, name,company, designation,shift, image = frappe.db.get_value("Employee", {'attendance_device_id': self.attendance_id},
+        self.employee = frappe.db.get_value("Employee", {'attendance_device_id': self.attendance_id},
+                                                        ["name", "employee_name", "company", "designation", "default_shift", "image"])
+        employee1, name, company,designation,shift, image = frappe.db.get_value("Employee", {'attendance_device_id': self.attendance_id},
                                                         ["name", "employee_name", "company", "designation", "default_shift", "image"])
         self.employee=ModelEmployee(employee1,name,company,designation,shift,image)
-        
-                                                
         
 
     def set_check_in(self):
         self.doc = frappe.new_doc("Employee Checkin")
         self.doc.employee = self.employee.name
         self.doc.employee_name = self.employee.employee_name
-        self.doc.time = now_datetime()+timedelta(minutes=30)
+        self.doc.time = now_datetime()
         self.doc.device_id = self.attendance_id
         self.doc.log_type = EMPLOYEE_LOG_TYPE_IN
         self.doc.insert()
