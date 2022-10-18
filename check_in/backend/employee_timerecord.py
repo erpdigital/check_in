@@ -1,17 +1,18 @@
 import frappe
+import json
 from frappe import _
 from frappe.model.document import Document
 from frappe.utils import get_link_to_form, now_datetime, nowdate
 from frappe.utils.data import nowdate
-from check_in.constants import *
-from check_in.model import *
-
+from check_in.backend.constants import *
+from check_in.backend.model import *
+from datetime import timedelta
     
 class EmployeeTimeRecord:
     def __init__(self, attendance_id, type) -> None:
         self.attendance_id = attendance_id
         self.type = type
-    
+       
 
     def make(self):        
         return self.make_checkin() if(self.type == EMPLOYEE_LOG_TYPE_IN) else self.make_checkout()   
@@ -22,7 +23,9 @@ class EmployeeTimeRecord:
         self.set_check_in()
         self.get_working_hours()
         self.set_attendance()
-        return self.employee  # [ self.employee.employee_name, self.employee.image, self.employee.designation ]
+        result=self.employee._asdict()
+        result['totalHours'] = self.working_hours
+        return json.dumps(result)  
 
 
     def make_checkout(self):
@@ -30,7 +33,9 @@ class EmployeeTimeRecord:
         self.set_check_out()
         self.get_working_hours()
         self.set_attendance()
-        return [ self.employee.employee_name, self.employee.image, self.employee.company, self.employee.designation ]
+        result=self.employee._asdict()
+        result['totalHours'] = self.working_hours
+        return json.dumps(result) 
 
     
     def check_status(self):
@@ -72,7 +77,7 @@ class EmployeeTimeRecord:
         self.doc = frappe.new_doc("Employee Checkin")
         self.doc.employee = self.employee.name
         self.doc.employee_name = self.employee.employee_name
-        self.doc.time = now_datetime()
+        self.doc.time = now_datetime()+timedelta(minutes=30)
         self.doc.device_id = self.attendance_id
         self.doc.log_type = EMPLOYEE_LOG_TYPE_OUT
         self.doc.insert()
@@ -84,6 +89,7 @@ class EmployeeTimeRecord:
                              fields=['time', 'log_type'], order_by='time desc')
 
         self.working_hours = self.calculate_working_hours(doc, EMPLOYEE_WORK_HRS_COMP_TYPE)
+       
         
        
     def set_attendance(self):
