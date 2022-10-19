@@ -42,7 +42,9 @@ class EmployeeTimeRecord:
         self.get_employee()
         return self.get_status()
 
-
+    def get_last_checkin(self):
+        self.last_checkin = frappe.get_last_doc('Employee Checkin', filters={"device_id": self.attendance_id})
+    
     def get_status(self):
         is_attendance_exist = frappe.db.exists(
             'Attendance', {"employee": self.employee.name, "attendance_date": nowdate()})
