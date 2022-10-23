@@ -28,6 +28,7 @@ class EmployeeTimeRecord:
 
     def make_checkout(self):
         self.get_employee()
+        self.get_last_checkin()
         self.set_check_out()
         self.get_working_hours()
         self.set_attendance()
