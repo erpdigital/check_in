@@ -6,6 +6,7 @@ with open("requirements.txt") as f:
 # get version from __version__ variable in check_in/__init__.py
 from check_in import __version__ as version
 
+
 setup(
 	name="check_in",
 	version=version,
