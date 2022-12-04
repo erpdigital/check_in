@@ -14,18 +14,18 @@ from check_in.backend.constants import *
 
 #attendance_id for testing assigned, will remove
 @frappe.whitelist()
-def check_in(attendance_id="0493543216"):
+def check_in(attendance_id=0):
     employee_timerecord = EmployeeTimeRecord(attendance_id=attendance_id, type=EMPLOYEE_LOG_TYPE_IN)
     return employee_timerecord.make()
     
 
 @frappe.whitelist()
-def check_out(attendance_id="0493543216"):
+def check_out(attendance_id=0):
     employee_timerecord = EmployeeTimeRecord(attendance_id=attendance_id, type=EMPLOYEE_LOG_TYPE_OUT)
     return employee_timerecord.make()
 
 
 @frappe.whitelist()
-def get_status(attendance_id="0493543216"):
+def get_status(attendance_id=0):
     employee_timerecord = EmployeeTimeRecord(attendance_id=attendance_id,type='')
     return employee_timerecord.check_status()

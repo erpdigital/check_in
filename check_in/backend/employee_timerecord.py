@@ -15,7 +15,19 @@ class EmployeeTimeRecord:
         self.type = type
 
     def make(self):
+        if(self.attendance_id == 0):
+              self.find_Id_by_session_user()  
         return self.make_checkin() if (self.type == EMPLOYEE_LOG_TYPE_IN) else self.make_checkout()
+
+    def find_Id_by_session_user(self):
+        employee = frappe.db.get_values(
+		"Employee",
+		{"user_id": frappe.session.user},
+		["attendance_device_id"],
+		as_dict=False)
+        if employee:
+            employee = employee[0]
+        self.attendance_id = employee[0]
 
     def make_checkin(self):
         self.get_employee()
@@ -38,6 +50,8 @@ class EmployeeTimeRecord:
         return json.dumps(result)
 
     def check_status(self):
+        if(self.attendance_id == 0):
+              self.find_Id_by_session_user()  
         self.get_employee()
         return self.get_status()
 
