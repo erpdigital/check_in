@@ -1,3 +1,4 @@
+frappe.provide('frappe.dom');
 $(document).ready(function(){
   
   const date = new Date();
