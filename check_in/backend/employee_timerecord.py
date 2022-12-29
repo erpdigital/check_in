@@ -95,7 +95,7 @@ class EmployeeTimeRecord:
         self.doc = frappe.new_doc("Employee Checkin")
         self.doc.employee = self.employee.name
         self.doc.employee_name = self.employee.employee_name
-        self.doc.time = now_datetime()+timedelta(minutes=30)
+        self.doc.time = now_datetime()
         self.doc.device_id = self.attendance_id
         self.doc.log_type = EMPLOYEE_LOG_TYPE_OUT
         self.doc.insert()
