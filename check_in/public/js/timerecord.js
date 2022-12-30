@@ -5,7 +5,7 @@ $(document).ready(function(){
           .then(r => {      app.innerHTML = 'Check Out';
           app.onclick = function(){check_out();}
           app.classList= "btn btn-info"
-          window.location.reload();
+
         })
       }
       
@@ -14,7 +14,7 @@ $(document).ready(function(){
           .then(r => {       app.innerHTML = 'Check In';
           app.classList= "btn btn-info"
           app.onclick =function(){check_in();}
-          window.location.reload();
+     
         });
     }
 
