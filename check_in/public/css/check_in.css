@@ -1,0 +1,13 @@
+.progress-bar {
+    height: 20px;
+    background: red;
+    width: 0px;
+    text-align: center;       
+    border: 2px solid gray;
+    margin-top: 10px;
+  }
+  
+  .pp{
+    width : 600px;
+    background-color: #e0e0e0;
+  }
