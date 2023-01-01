@@ -3,6 +3,7 @@ $(document).ready(function(){
     function check_in() {
         frappe.call('check_in.api.check_in', {     })
           .then(r => {     
+            alert('hello');
           app = document.getElementById('check')  
           app.innerHTML = 'Check Out';
           app.onclick = function(){check_out();}
