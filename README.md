@@ -1,4 +1,7 @@
 # Check In - Employee Time Tracking System
+![image](https://github.com/user-attachments/assets/981154a0-6da1-41cb-9498-5047245b7007)
+
+
 
 A comprehensive employee check-in/check-out system built on the Frappe framework. This application allows employees to track their working hours through a simple web interface with support for RFID-based attendance tracking.
 
